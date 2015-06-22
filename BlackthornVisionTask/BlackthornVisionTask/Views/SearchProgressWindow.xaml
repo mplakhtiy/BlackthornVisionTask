@@ -1,0 +1,9 @@
+﻿<Window x:Class="BlackthornVisionTask.Views.SearchProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SearchProgressWindow" Height="300" Width="300">
+    <Grid>
+        <Button Content="Cancel" Height="25" Width="75" Command="{Binding Cancel}"/>
+
+    </Grid>
+</Window>
