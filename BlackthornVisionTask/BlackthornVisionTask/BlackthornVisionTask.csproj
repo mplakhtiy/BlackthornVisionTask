@@ -67,7 +67,9 @@
     <Compile Include="Commands\SearchProgressCommands\CancelCommand.cs" />
     <Compile Include="Commands\StartWindowCommands\FindDuplicatedFilesCommand.cs" />
     <Compile Include="Commands\StartWindowCommands\SelectFolderCommand.cs" />
-    <Compile Include="Events\FolderPathEventArgs.cs" />
+    <Compile Include="EventArgsExtension\FolderPathEventArgs.cs" />
+    <Compile Include="EventArgsExtension\ResultDictionaryEventArgs.cs" />
+    <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ViewManager.cs" />
     <Compile Include="ViewModels\ResultWindowViewModel.cs" />
     <Compile Include="ViewModels\SearchProgressWindowViewModel.cs" />

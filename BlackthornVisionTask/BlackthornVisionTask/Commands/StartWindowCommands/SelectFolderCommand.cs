@@ -4,7 +4,7 @@ using BlackthornVisionTask.ViewModels;
 
 namespace BlackthornVisionTask.Commands.StartWindowCommands
 {
-    class SelectFolderCommand:ICommand
+    internal class SelectFolderCommand : ICommand
     {
         private readonly StartWindowViewModel viewModel;
 
@@ -24,9 +24,5 @@ namespace BlackthornVisionTask.Commands.StartWindowCommands
         }
 
         public event EventHandler CanExecuteChanged;
-        //{
-        //    //add { CommandManager.RequerySuggested += value; }
-        //    //remove { CommandManager.RequerySuggested -= value; }
-        //}
     }
 }

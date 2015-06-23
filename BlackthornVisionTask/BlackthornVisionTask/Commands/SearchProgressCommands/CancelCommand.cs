@@ -4,11 +4,11 @@ using BlackthornVisionTask.ViewModels;
 
 namespace BlackthornVisionTask.Commands.SearchProgressCommands
 {
-    class CancelCommand:ICommand
+    internal class CancelCommand : ICommand
     {
         private readonly SearchProgressWindowViewModel viewModel;
 
-         public CancelCommand(SearchProgressWindowViewModel viewModel)
+        public CancelCommand(SearchProgressWindowViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -24,9 +24,5 @@ namespace BlackthornVisionTask.Commands.SearchProgressCommands
         }
 
         public event EventHandler CanExecuteChanged;
-        //{
-        //    //add { CommandManager.RequerySuggested += value; }
-        //    //remove { CommandManager.RequerySuggested -= value; }
-        //}
     }
 }

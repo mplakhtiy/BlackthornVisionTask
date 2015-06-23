@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace BlackthornVisionTask.Managers
 {
-    class FileManager
+    internal class FileManager
     {
         private readonly List<string> filesPathList = new List<string>();
 
-        public Dictionary<string, List<string>> FindDuplicatedFiles(string folderPath)
+        public Dictionary<string, string> FindDuplicatedFiles(string folderPath)
         {
             searchAllNestedFiles(folderPath);
 
@@ -44,7 +45,34 @@ namespace BlackthornVisionTask.Managers
                     duplicatedFilesDictionary.Add(filesPathList[i], duplicatedFilesList);
                 }
             }
-            return duplicatedFilesDictionary;
+            return convertToReturnDictionary(duplicatedFilesDictionary);
+        }
+
+        private Dictionary<string, string> convertToReturnDictionary(Dictionary<string, List<string>> inputDictionary)
+        {
+            Dictionary<string, string> returnDictionary = new Dictionary<string, string>();
+            StringBuilder valueBuilder=new StringBuilder();
+            int count = 0;
+
+            foreach (var dictionary in inputDictionary)
+            {
+                if (dictionary.Value.Count > count)
+                {
+                    int i;
+                    for (i = count; i < dictionary.Value.Count; i++)
+                    {
+                        valueBuilder.Append(dictionary.Value[i] + "\n");
+                    }
+                    returnDictionary.Add(dictionary.Key, valueBuilder.ToString());
+                    count = dictionary.Value.Count;
+                    valueBuilder.Clear();
+                }
+                else
+                {
+                    returnDictionary.Add(dictionary.Key, valueBuilder.ToString());
+                }
+            }
+            return returnDictionary;
         }
 
         private void searchAllNestedFiles(string folderPath)
@@ -77,6 +105,27 @@ namespace BlackthornVisionTask.Managers
             return isFileSizeEqual;
         }
 
+        private static bool compareFileHashes(string filePath1, string filePath2)
+        {
+            if (compareFileSizes(filePath1, filePath2))
+            {
+
+                HashAlgorithm hash = HashAlgorithm.Create();
+
+                byte[] fileHash1;
+                byte[] fileHash2;
+
+                using (FileStream fileStream1 = new FileStream(filePath1, FileMode.Open),
+                    fileStream2 = new FileStream(filePath2, FileMode.Open))
+                {
+                    fileHash1 = hash.ComputeHash(fileStream1);
+                    fileHash2 = hash.ComputeHash(fileStream2);
+                }
+                return BitConverter.ToString(fileHash1) == BitConverter.ToString(fileHash2);
+            }
+            return false;
+        }
+
         //private static bool compareFileBytes(string filePath1, string filePath2)
         //{
         //    if (compareFileSizes(filePath1, filePath2))
@@ -98,26 +147,5 @@ namespace BlackthornVisionTask.Managers
         //    }
         //    return false;
         //}
-
-        private static bool compareFileHashes(string filePath1, string filePath2)
-        {
-            if (compareFileSizes(filePath1, filePath2))
-            {
-
-                HashAlgorithm hash = HashAlgorithm.Create();
-
-                byte[] fileHash1;
-                byte[] fileHash2;
-
-                using (FileStream fileStream1 = new FileStream(filePath1, FileMode.Open),
-                    fileStream2 = new FileStream(filePath2, FileMode.Open))
-                {
-                    fileHash1 = hash.ComputeHash(fileStream1);
-                    fileHash2 = hash.ComputeHash(fileStream2);
-                }
-                return BitConverter.ToString(fileHash1) == BitConverter.ToString(fileHash2);
-            }
-            return false;
-        }
     }
 }

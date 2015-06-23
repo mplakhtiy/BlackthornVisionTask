@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using BlackthornVisionTask.Managers;
 using BlackthornVisionTask.Views;
 
 namespace BlackthornVisionTask
@@ -14,5 +15,11 @@ namespace BlackthornVisionTask
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            StartWindow startWindow=new StartWindow();
+            new ViewManager(startWindow);
+        }
     }
 }
