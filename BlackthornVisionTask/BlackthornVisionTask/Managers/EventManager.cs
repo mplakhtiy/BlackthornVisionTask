@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using BlackthornVisionTask.EventArgsExtension;
 
 namespace BlackthornVisionTask.Managers
@@ -55,6 +56,22 @@ namespace BlackthornVisionTask.Managers
             if (CancelButtonPressed != null)
             {
                 CancelButtonPressed(source, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
+        #region NewThreadStartedEventHandler Members
+
+        public delegate void NewThreadStartedEventHandler(object source, ThreadEventArgs eventArgs);
+
+        public static event NewThreadStartedEventHandler NewThreadStarted;
+
+        public static void OnNewThreadStarted(object source, Thread thread)
+        {
+            if (NewThreadStarted != null)
+            {
+                NewThreadStarted(source,new ThreadEventArgs(thread));
             }
         }
 

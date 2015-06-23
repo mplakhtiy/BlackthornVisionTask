@@ -39,6 +39,7 @@ namespace BlackthornVisionTask.ViewModels
             threadForSearching = new Thread(findDuplicatedFiles);
             configureThreads();
             threadForSearching.Start();
+            onNewThreadStarted();
         }
 
         private void findDuplicatedFiles()
@@ -49,14 +50,19 @@ namespace BlackthornVisionTask.ViewModels
 
         private void configureThreads()
         {
-            currentThread.Priority = ThreadPriority.Lowest;
-            threadForSearching.Priority = ThreadPriority.Lowest;
+            currentThread.Priority = ThreadPriority.BelowNormal;
+            threadForSearching.Priority = ThreadPriority.BelowNormal;
             threadForSearching.SetApartmentState(ApartmentState.STA);
         }
 
         private void onDuplicatedFilesFound()
         {
             EventManager.OnDuplicatedFilesFound(this, resultDictionary);
+        }
+
+        private void onNewThreadStarted()
+        {
+            EventManager.OnNewThreadStarted(this, threadForSearching);
         }
 
     }

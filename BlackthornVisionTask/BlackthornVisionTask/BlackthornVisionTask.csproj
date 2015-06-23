@@ -69,6 +69,7 @@
     <Compile Include="Commands\StartWindowCommands\SelectFolderCommand.cs" />
     <Compile Include="EventArgsExtension\FolderPathEventArgs.cs" />
     <Compile Include="EventArgsExtension\ResultDictionaryEventArgs.cs" />
+    <Compile Include="EventArgsExtension\ThreadEventArgs.cs" />
     <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ViewManager.cs" />
     <Compile Include="ViewModels\ResultWindowViewModel.cs" />
