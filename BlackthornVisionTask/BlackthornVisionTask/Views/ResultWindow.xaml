@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ResultWindow" Height="300" Width="300">
     <Grid>
-        <DataGrid x:Name="DataGrid" ItemsSource="{Binding ResultDictionary}" AutoGenerateColumns="False" x:FieldModifier="public">
+        <DataGrid x:Name="DataGrid" ItemsSource="{Binding ResultDictionary}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="File Path" Binding="{Binding Key}"/>
                 <DataGridTextColumn Header="Duplicated File Path" Binding="{Binding Value}"/>
